@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/checker-512.jpg-ae602ed47a005aa5ce4ee29c21d09111.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://assets/commons/textures/checker-512.jpg"
+dest_files=[ "res://.import/checker-512.jpg-ae602ed47a005aa5ce4ee29c21d09111.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=1
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0

@@ -1,0 +1,203 @@
+[gd_scene load_steps=33 format=2]
+
+[ext_resource path="res://assets/commons/textures/checker-512.jpg" type="Texture" id=1]
+[ext_resource path="res://assets/commons/materials/functions/rotate_uv.gd" type="Script" id=2]
+
+[sub_resource type="VisualShaderNodeScalarOp" id=1]
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=2]
+uniform_name = "RotationDegree"
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=3]
+function = 0
+
+[sub_resource type="VisualShaderNodeScalarOp" id=4]
+operator = 1
+
+[sub_resource type="VisualShaderNodeScalarOp" id=5]
+operator = 2
+
+[sub_resource type="VisualShaderNodeTexture" id=6]
+texture = ExtResource( 1 )
+
+[sub_resource type="VisualShaderNodeScalarOp" id=7]
+
+[sub_resource type="VisualShaderNodeInput" id=8]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id=9]
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=10]
+function = 1
+
+[sub_resource type="VisualShaderNodeInput" id=11]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id=12]
+
+[sub_resource type="VisualShaderNodeScalarOp" id=13]
+operator = 2
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=14]
+uniform_name = "Mid"
+
+[sub_resource type="VisualShaderNodeInput" id=15]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeScalarOp" id=16]
+operator = 1
+
+[sub_resource type="VisualShaderNodeScalarOp" id=17]
+operator = 1
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=18]
+function = 0
+
+[sub_resource type="VisualShaderNodeScalarOp" id=19]
+operator = 1
+
+[sub_resource type="VisualShaderNodeScalarOp" id=20]
+
+[sub_resource type="VisualShaderNodeScalarOp" id=21]
+operator = 2
+
+[sub_resource type="VisualShaderNodeCustom" id=22]
+script = ExtResource( 2 )
+
+[sub_resource type="VisualShaderNodeColorConstant" id=23]
+constant = Color( 0.12207, 0.0195503, 0.0195503, 1 )
+
+[sub_resource type="VisualShaderNodeVectorCompose" id=24]
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id=25]
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=26]
+function = 1
+
+[sub_resource type="VisualShaderNodeScalarOp" id=27]
+operator = 2
+
+[sub_resource type="VisualShaderNodeScalarOp" id=28]
+operator = 1
+
+[sub_resource type="VisualShader" id=29]
+code = "shader_type canvas_item;
+uniform float RotationDegree;
+uniform sampler2D tex_frg_2;
+
+
+// RotateUv
+
+	vec3 rotateUV(vec3 uv, float rotation) {
+		float mid = 0.5;
+		return vec3(
+			cos(rotation) * (uv.x - mid) + sin(rotation) * (uv.y - mid) + mid,
+			cos(rotation) * (uv.y - mid) - sin(rotation) * (uv.x - mid) + mid,
+			1
+		);
+	}
+	
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:21
+	vec3 n_out21p0 = vec3(UV, 0.0);
+
+// ScalarUniform:14
+	float n_out14p0 = RotationDegree;
+
+// RotateUv:36
+	vec3 n_out36p0;
+	{
+		n_out36p0 = rotateUV(vec3(n_out21p0), n_out14p0);
+	}
+
+// Texture:2
+	vec4 tex_frg_2_read = texture(tex_frg_2, n_out36p0.xy);
+	vec3 n_out2p0 = tex_frg_2_read.rgb;
+	float n_out2p1 = tex_frg_2_read.a;
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -656.096, -300 )
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2( 400, 100 )
+nodes/fragment/2/node = SubResource( 6 )
+nodes/fragment/2/position = Vector2( 140, 140 )
+nodes/fragment/3/node = SubResource( 15 )
+nodes/fragment/3/position = Vector2( -1660, 600 )
+nodes/fragment/4/node = SubResource( 24 )
+nodes/fragment/4/position = Vector2( -180, 400 )
+nodes/fragment/5/node = SubResource( 25 )
+nodes/fragment/5/position = Vector2( -1480, 580 )
+nodes/fragment/7/node = SubResource( 26 )
+nodes/fragment/7/position = Vector2( -1200, 420 )
+nodes/fragment/8/node = SubResource( 27 )
+nodes/fragment/8/position = Vector2( -960, 460 )
+nodes/fragment/9/node = SubResource( 28 )
+nodes/fragment/9/position = Vector2( -1200, 520 )
+nodes/fragment/11/node = SubResource( 1 )
+nodes/fragment/11/position = Vector2( -760, 580 )
+nodes/fragment/14/node = SubResource( 2 )
+nodes/fragment/14/position = Vector2( -2080, 740 )
+nodes/fragment/16/node = SubResource( 3 )
+nodes/fragment/16/position = Vector2( -1200, 840 )
+nodes/fragment/17/node = SubResource( 4 )
+nodes/fragment/17/position = Vector2( -1200, 660 )
+nodes/fragment/19/node = SubResource( 5 )
+nodes/fragment/19/position = Vector2( -980, 720 )
+nodes/fragment/20/node = SubResource( 7 )
+nodes/fragment/20/position = Vector2( -540, 620 )
+nodes/fragment/21/node = SubResource( 8 )
+nodes/fragment/21/position = Vector2( -700, 60 )
+nodes/fragment/22/node = SubResource( 9 )
+nodes/fragment/22/position = Vector2( -540, 160 )
+nodes/fragment/24/node = SubResource( 10 )
+nodes/fragment/24/position = Vector2( -1200, 1140 )
+nodes/fragment/26/node = SubResource( 11 )
+nodes/fragment/26/position = Vector2( -1640, 1280 )
+nodes/fragment/27/node = SubResource( 12 )
+nodes/fragment/27/position = Vector2( -1480, 1280 )
+nodes/fragment/28/node = SubResource( 13 )
+nodes/fragment/28/position = Vector2( -940, 1180 )
+nodes/fragment/29/node = SubResource( 14 )
+nodes/fragment/29/position = Vector2( -1980, 880 )
+nodes/fragment/30/node = SubResource( 16 )
+nodes/fragment/30/position = Vector2( -1200, 1220 )
+nodes/fragment/31/node = SubResource( 17 )
+nodes/fragment/31/position = Vector2( -720, 1340 )
+nodes/fragment/32/node = SubResource( 18 )
+nodes/fragment/32/position = Vector2( -1180, 1540 )
+nodes/fragment/33/node = SubResource( 19 )
+nodes/fragment/33/position = Vector2( -1164, 1381 )
+nodes/fragment/34/node = SubResource( 20 )
+nodes/fragment/34/position = Vector2( -540, 1340 )
+nodes/fragment/35/node = SubResource( 21 )
+nodes/fragment/35/position = Vector2( -960, 1440 )
+nodes/fragment/36/node = SubResource( 22 )
+nodes/fragment/36/position = Vector2( -260, 60 )
+nodes/fragment/37/node = SubResource( 23 )
+nodes/fragment/37/position = Vector2( 160, 40 )
+nodes/fragment/connections = PoolIntArray( 7, 0, 8, 0, 3, 0, 5, 0, 5, 0, 9, 0, 9, 0, 8, 1, 8, 0, 11, 0, 5, 1, 17, 0, 16, 0, 19, 0, 17, 0, 19, 1, 19, 0, 11, 1, 11, 0, 20, 0, 20, 0, 4, 0, 21, 0, 22, 0, 22, 2, 4, 2, 14, 0, 7, 0, 26, 0, 27, 0, 24, 0, 28, 0, 29, 0, 9, 1, 29, 0, 17, 1, 29, 0, 20, 1, 27, 1, 30, 0, 14, 0, 16, 0, 14, 0, 24, 0, 29, 0, 30, 1, 30, 0, 28, 1, 28, 0, 31, 0, 27, 0, 33, 0, 29, 0, 33, 1, 14, 0, 32, 0, 29, 0, 34, 1, 31, 0, 34, 0, 33, 0, 35, 0, 32, 0, 35, 1, 35, 0, 31, 1, 34, 0, 4, 1, 21, 0, 36, 0, 2, 0, 0, 0, 36, 0, 2, 0, 14, 0, 36, 1 )
+
+[sub_resource type="ShaderMaterial" id=30]
+shader = SubResource( 29 )
+shader_param/RotationDegree = 0.785
+
+[node name="checker-512" type="Sprite"]
+material = SubResource( 30 )
+position = Vector2( 389.274, 263.618 )
+texture = ExtResource( 1 )
