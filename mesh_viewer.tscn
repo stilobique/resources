@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/commons/meshes/cube.obj" type="ArrayMesh" id=1]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="Cube" type="MeshInstance" parent="."]
+mesh = ExtResource( 1 )
+material/0 = null
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.624043, 0.459278, -0.632166, 0, 0.809027, 0.587771, 0.78139, -0.366795, 0.504868, -2.30729, 1.36888, 1.73812 )
