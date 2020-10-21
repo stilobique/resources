@@ -1,6 +1,6 @@
 tool
 extends VisualShaderNodeCustom
-class_name RotateUv
+class_name VisualShaderNodeRotateUv
 
 
 func _get_name():
@@ -55,6 +55,5 @@ func _get_global_code(_mode):
 	"""
 
 func _get_code(input_vars, output_vars, _mode, _type):
-	print("Start debug node rotate uv", input_vars)
 	return output_vars[0] + " = rotateUV(vec3(%s), %s);" % [input_vars[0], input_vars[1]]
 
