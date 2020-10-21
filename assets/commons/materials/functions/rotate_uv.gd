@@ -10,7 +10,7 @@ func _get_category():
 	return "UV"
 	
 func _get_description():
-	return "Rotate an UV vector"
+	return "Rotate an UV vector, use an scale at 0 to 1."
 	
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_SCALAR
@@ -44,6 +44,7 @@ func _get_output_port_type(_port):
 func _get_global_code(_mode):
 	return """
 	vec3 rotateUV(vec3 uv, float rotation) {
+		rotation = radians(rotation) * 360.0;
 		float mid = 0.5;
 		return vec3(
 			cos(rotation) * (uv.x - mid) + sin(rotation) * (uv.y - mid) + mid,
