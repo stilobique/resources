@@ -1,6 +1,8 @@
 # Assets
-
 Various material function (custom node shader) and default textures -checker.
+
+# How to used-it
+Integrate this repo has a submodule on your project.
 
 # Licences
 - [Icon find on Icon Finder, under GPL licences](https://www.iconfinder.com/icons/29243/3d_texture_and_shading_icon).
