@@ -53,6 +53,5 @@ func _get_global_code(_mode):
 	"""
 
 func _get_code(input_vars, output_vars, _mode, _type):
-	print("nput value : ", input_vars)
 	return output_vars[0] + " = panner(%s, vec3(%s), vec3(%s));" % [input_vars[0], input_vars[1], input_vars[2]]
 
