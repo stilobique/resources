@@ -1,61 +1,54 @@
 tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeTileUv
+class_name VisualShaderNodeChecker
 
 
 func _get_name():
-	return "TileUv"
+	return "Checker"
 	
 func _get_category():
-	return "UV"
+	return "Checker"
 	
 func _get_description():
-	return "Size uv on x/y/z input."
+	return "Generate a checker pattern."
 	
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_VECTOR
 	
 func _get_input_port_count():
-	return 4
+	return 1
 	
 func _get_input_port_name(port):
 	match port:
 		0:
 			return "uv"
-		1:
-			return "XSize"
-		2:
-			return "YSize"
-		3:
-			return "ZSize"
 
 func _get_input_port_type(port):
 	match port:
 		0:
 			return VisualShaderNode.PORT_TYPE_VECTOR
-		1:
-			return VisualShaderNode.PORT_TYPE_SCALAR
-		2:
-			return VisualShaderNode.PORT_TYPE_SCALAR
-		3: 
-			return VisualShaderNode.PORT_TYPE_SCALAR
 
 func _get_output_port_count():
 	return 1
 
 func _get_output_port_name(_port):
-	return "uv"
+	return "checker"
 	
 func _get_output_port_type(_port):
 	return VisualShaderNode.PORT_TYPE_VECTOR
 	
 func _get_global_code(_mode):
 	return """
-	vec3 tileUV(vec3 uv, float xaxis, float yaxis, float zaxis) {
-		return vec3(uv.x * xaxis, uv.y * yaxis, uv.z * zaxis);
+	vec3 checker(vec3 uv) {
+		float xuv = floor(fract(uv.x * (-1.0)) + 0.5);
+		float yuv = floor(fract(uv.x) + 0.5);
+		float zuv = floor(fract(uv.y) + 0.5);
+		float combine = mix(xuv, yuv, zuv);
+
+		return vec3(combine);
 	}
 	"""
 
 func _get_code(input_vars, output_vars, _mode, _type):
-	return output_vars[0] + " = tileUV(vec3(%s), %s, %s, %s);" % [input_vars[0], input_vars[1], input_vars[2], input_vars[3] ]
+	return output_vars[0] + " = checker(vec3(%s));" % [input_vars[0]]
 
