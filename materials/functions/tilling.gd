@@ -13,7 +13,7 @@ func _get_description():
 	return "Size uv on x/y/z input."
 	
 func _get_return_icon_type():
-	return VisualShaderNode.PORT_TYPE_SCALAR
+	return VisualShaderNode.PORT_TYPE_VECTOR
 	
 func _get_input_port_count():
 	return 4
